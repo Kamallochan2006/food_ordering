@@ -3,6 +3,7 @@ package com.example.foodordering
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
@@ -17,8 +18,8 @@ import com.example.foodordering.models.RestaurentModel
 
 class RestaurantMenuActivity : AppCompatActivity(), MenuListAdapter.MenuListClickListener {
 
-    var checkoutButton: TextView = findViewById(R.id.checkoutButton)
-    var menuRecyclerVuew: RecyclerView = findViewById(R.id.menuRecyclerVuew)
+    var checkoutButton: TextView? = null
+    var menuRecyclerVuew: RecyclerView? = null
     private var itemsInTheCartList: MutableList<Menus?>? = null
     private var totalItemInCartCount = 0
     private var menuList: List<Menus?>? = null
@@ -27,6 +28,9 @@ class RestaurantMenuActivity : AppCompatActivity(), MenuListAdapter.MenuListClic
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restaurant_menu)
+
+        checkoutButton = findViewById(R.id.checkoutButton)
+        menuRecyclerVuew = findViewById(R.id.menuRecyclerVuew)
 
         val restaurantModel = intent?.getParcelableExtra<RestaurentModel>("RestaurantModel")
 
@@ -38,28 +42,31 @@ class RestaurantMenuActivity : AppCompatActivity(), MenuListAdapter.MenuListClic
         menuList = restaurantModel?.menus
 
         initRecyclerView(menuList)
-        checkoutButton.setOnClickListener {
+        checkoutButton?.setOnClickListener {
             if (itemsInTheCartList != null && itemsInTheCartList!!.size <= 0) {
                 Toast.makeText(this@RestaurantMenuActivity, "Please add some items in cart", Toast.LENGTH_LONG).show()
             } else {
                 restaurantModel?.menus = itemsInTheCartList
-                val intent = Intent(this@RestaurantMenuActivity, PlaceYourOrderActivity::class.java)
+                val intent = Intent(this@RestaurantMenuActivity, SuccessOrderActivity::class.java)
                 intent.putExtra("RestaurantModel", restaurantModel)
                 startActivityForResult(intent, 1000)
             }
         }
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        val mainView = findViewById<View>(R.id.main)
+        mainView?.let {
+            ViewCompat.setOnApplyWindowInsetsListener(it) { v, insets ->
+                val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+                insets
+            }
         }
     }
 
     private fun initRecyclerView(menus: List<Menus?>?) {
-        menuRecyclerVuew.layoutManager = GridLayoutManager(this, 2)
+        menuRecyclerVuew?.layoutManager = GridLayoutManager(this, 2)
         menuListAdapter = MenuListAdapter(menus, this)
-        menuRecyclerVuew.adapter = menuListAdapter
+        menuRecyclerVuew?.adapter = menuListAdapter
     }
 
     override fun addToCartClickListener(menu: Menus) {
@@ -71,7 +78,7 @@ class RestaurantMenuActivity : AppCompatActivity(), MenuListAdapter.MenuListClic
         for (menu in itemsInTheCartList!!) {
             totalItemInCartCount += menu?.totalInCart ?: 0
         }
-        checkoutButton.text = "Checkout ($totalItemInCartCount) Items"
+        checkoutButton?.text = "Checkout ($totalItemInCartCount) Items"
     }
 
     override fun updateCartClickListener(menu: Menus) {
@@ -82,7 +89,7 @@ class RestaurantMenuActivity : AppCompatActivity(), MenuListAdapter.MenuListClic
         for (menu in itemsInTheCartList!!) {
             totalItemInCartCount += menu?.totalInCart ?: 0
         }
-        checkoutButton.text = "Checkout ($totalItemInCartCount) Items"
+        checkoutButton?.text = "Checkout ($totalItemInCartCount) Items"
     }
 
     override fun removeFromCartClickListener(menu: Menus) {
@@ -92,7 +99,7 @@ class RestaurantMenuActivity : AppCompatActivity(), MenuListAdapter.MenuListClic
             for (menu in itemsInTheCartList!!) {
                 totalItemInCartCount += menu?.totalInCart ?: 0
             }
-            checkoutButton.text = "Checkout ($totalItemInCartCount) Items"
+            checkoutButton?.text = "Checkout ($totalItemInCartCount) Items"
         }
     }
 

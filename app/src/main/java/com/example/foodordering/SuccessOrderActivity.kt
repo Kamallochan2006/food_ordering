@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.foodordering.models.RestaurentModel
 
 class SuccessOrderActivity : AppCompatActivity() {
@@ -20,15 +18,10 @@ class SuccessOrderActivity : AppCompatActivity() {
         actionbar?.setSubtitle(restaurantModel?.address)
         actionbar?.setDisplayHomeAsUpEnabled(false)
 
-        findViewById<Button>(R.id.buttonDone).setOnClickListener {
+        findViewById<Button>(R.id.buttonPlaceYourOrder).setOnClickListener {
             startActivity(Intent(this@SuccessOrderActivity, MainActivity::class.java))
             setResult(RESULT_OK)
             finish()
-        }
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
         }
     }
 }
