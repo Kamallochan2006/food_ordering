@@ -1,0 +1,48 @@
+[
+  {
+    "name":"McDonald's",
+    "address":"Empire Building, No 134 to 136",
+    "delivery_charge": 5,
+    "image":"https://upload.wikimedia.org/wikinews/en/9/97/Mcdonalds-logo.JPG",
+    "hours":{
+      "Sunday":"11:00 AM - 7:00 PM",
+      "Monday":"10:00 AM - 10:00 PM",
+      "Tuesday":"10:00 AM - 10:00 PM",
+      "Wednesday":"10:00 AM - 8:00 PM",
+      "Thursday":"10:00 AM - 10:00 PM",
+      "Friday":"10:00 AM - 10:00 PM",
+      "Saturday":"9:00 AM - 2:00 PM"
+    },
+    "menus": [
+      {
+        "name": "Chocolate Shake",
+        "price": 120,
+        "url": "https://i.pinimg.com/564x/65/c9/94/65c9945af0188e99b76b2ede42833781.jpg"
+      },
+      {
+        "name": "Strawberry Shake",
+        "price": 120,
+        "url": "https://i.pinimg.com/564x/61/75/ff/6175ff149c27c64ce1f20717a3b56ba6.jpg"
+      },
+      {
+        "name": "Pizza McPuff",
+        "price": 35,
+        "url": "https://live.staticflickr.com/8232/8477233192_f893a154a3_c.jpg"
+      },
+      {
+        "name": "McNuggets",
+        "price": 90,
+        "url": "https://i.pinimg.com/564x/15/4f/19/154f19252423d4689dbd56abe9e55fbf.jpg"
+      },
+      {
+        "name": "Veg Maharaja Mac",
+        "price": 160,
+        "url": "https://i.pinimg.com/564x/8f/32/72/8f32721adbb11e95a251a9922ead3762.jpg"
+      },
+      {
+        "name": "Chicken Wrap",
+        "price": 145,
+        "url": "https://i.pinimg.com/236x/11/d2/ff/11d2ff0f50c34b4ff16d13e48bba98ad.jpg"
+      }
+    ]
+  }]
