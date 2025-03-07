@@ -19,7 +19,7 @@ import java.io.StringWriter
 import java.io.Writer
 import java.lang.Exception
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), RestaurantListAdapter.RestaurantListClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -63,5 +63,9 @@ class MainActivity : AppCompatActivity() {
         return restaurantModel
     }
 
-
+    override fun onItemClick(restaurantModel: RestaurentModel) {
+        val intent = Intent(this, RestaurantMenuActivity::class.java)
+        intent.putExtra("RestaurantModel", restaurantModel)
+        startActivity(intent)
+    }
 }

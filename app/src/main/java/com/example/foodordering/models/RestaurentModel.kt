@@ -12,8 +12,7 @@ data class RestaurentModel(val name: String?, val address: String?, val delivery
         parcel.readString(),
         parcel.readParcelable(Hours::class.java.classLoader),
         parcel.createTypedArrayList(Menus)
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
